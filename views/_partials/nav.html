@@ -1,0 +1,31 @@
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">山西中医药大学体育场馆预约系统</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">首页</a>
+        <a class="p-2 text-dark" href="/news">院内新闻</a>
+        <a class="p-2 text-dark" href="/stra">院内设施</a>
+        <a class="p-2 text-dark" href="/comments">评论</a>
+        <a class="p-2 text-dark" href="/fix">设备维修</a>
+        {{ if user }}
+        <a class="p-2 text-dark" href="/start">开始预约</a>
+        <a class="p-2 text-dark" href="/admin">后台管理入口</a>
+        {{ else }}
+        <a class="p-2 text-dark" href="/login">开始预约</a>
+        {{ /if }}
+      </nav>
+      {{ if user }}
+          <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="javaScript:;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.email  }}
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/user-mess?email={{ user.email }}">个人信息</a>
+            <a class="dropdown-item" href="/edit?email={{ user.email }}">修改信息</a>
+          </div>
+        </div>
+      {{ else }}
+      <a class="btn btn-outline-primary" href="/login">登录</a>
+      <a class="btn btn-outline-primary" href="/register">注册</a>
+      {{ /if }}
+    </div>

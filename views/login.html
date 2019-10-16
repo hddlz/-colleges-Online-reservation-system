@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>山西中医药大学体育场馆预约系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/animate.css/animate.min.css">
+  </head>
+
+  <body class="text-center">
+    <div class="alert alert-danger" style="display: none;"  role="alert">
+      This is a danger alert—check it out!
+    </div>
+    <form class="form-signin" id="login_form">
+      <h1 class="h3 mb-3 font-weight-normal">用户登录</h1>
+      <label for="inputNumber" class="sr-only">学号</label>
+      <input type="text" id="inputNumber" class="form-control" name="number"  placeholder="学号" required autofocus>
+      <label for="inputPassword" class="sr-only">密码</label>
+      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="密码" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> 记住我
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      <div class="message">
+        <p style="display: inline-block;">没有账号?点击</p><a href="/register">注册</a>
+      </div>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+   /**
+ * 添加cookie
+ * @param {String} objName
+ * @param {String} objValue
+ * @param {Number} objHours
+ */
+function addCookie(objName,objValue,objHours){
+    var str = objName + "=" + escape(objValue);
+    
+    if(objHours > 0){ // 如果不设定过期时间, 浏览器关闭时cookie会自动消失
+        var date = new Date()
+        var ms = objHours * 3600 * 1000;
+        
+        date.setTime(date.getTime() + ms);
+        str += "; expires=" + date.toGMTString() + "; path=/page/;"; // 指定了cookie的path
+    }
+    
+    document.cookie = str;
+}
+/**
+ * 获取指定名称的cookie值
+ * @param {Object} objName
+ */
+function getCookie(objName) {
+    var arrStr = document.cookie.split("; ");
+    
+    for (var i = 0; i < arrStr.length; i ++) {
+        var temp = arrStr[i].split("=");
+        
+        if(temp[0] == objName) return unescape(temp[1]);
+    }
+}
+/**
+ * 删除指定名称的cookie值
+ * @param {Object} objName
+ */
+function delCookie(objName) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(objName);
+    if (cval != null) {
+        document.cookie = objName + "=" + cval + "; expires=" + exp.toGMTString() + "; path=/page/;"; // 指定了cookie的path
+    }
+}
+
+
+    var alert = $('.alert')
+    $('#login_form').on('submit', function (e) {
+      e.preventDefault()
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/login',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 0) {
+            addCookie("user",data.data)
+            window.location.href = '/'
+          } else if (err_code === 1) {
+            alert.text('邮箱或者密码错误')
+            alert.removeClass("display").addClass('show')
+          } else if (err_code === 500) {
+            alert.text('服务器忙，请稍后重试！')
+            alert.removeClass("display").addClass('show')
+          }
+        }
+      })
+    })
+  </script>
+  </body>
+</html>

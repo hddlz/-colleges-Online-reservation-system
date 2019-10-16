@@ -1,0 +1,24 @@
+{{ extend './_layout/home.html' }}
+
+{{ block 'content' }}   
+<main role="main">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form action="/fix" method="post">
+          <h4>设备维修</h4>
+          <div class="form-group">
+          <label for="place">设备</label>
+          <input  class="form-control" type="text" name="place" id="place" required>
+          </div>
+          <div class="form-group">
+          <label for="specific">问题</label>
+          <textarea   class="form-control" name="specific" id="specific" cols="30" rows="10" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">提交</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{{ /block }}

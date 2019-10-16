@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>山西中医药大学体育场馆预约系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/main.css" rel="stylesheet">
+    {{ block 'head' }}{{ /block }}
+  </head>
+
+  <body>
+
+
+  <!-- 顶部 -->
+  {{ include '../_partials/header.html' }}
+  
+  <!-- 导航条-->
+  {{ include '../_partials/nav.html' }}
+
+  <!-- 填空 -->
+  {{ block 'content' }}
+  {{ /block}}
+  
+  <!-- 底部 -->
+  {{ include '../_partials/footer.html'}}
+
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{{ block 'script' }}
+{{ /block }}
+</body>
+</html>
+  

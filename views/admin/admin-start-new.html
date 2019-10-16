@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>后台管理</title>
+
+    <!-- Bootstrap core CSS -->
+   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">预约系统后台</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="/logout">退出</a>
+        </li>
+      </ul>
+    </nav>
+
+<div class="container-fluid">
+      <div class="row">
+       <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link " href="/admin">
+                  <span data-feather="home"></span>
+                  首页
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/user">
+                  <span data-feather="file"></span>
+                  用户管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/new">
+                  <span data-feather="file"></span>
+                  添加用户
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/stras">
+                  <span data-feather="shopping-cart"></span>
+                  场地管理
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>功能管理</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link active" href="/admin/start">
+                  <span data-feather="file-text"></span>
+                  预约管理 <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/fix">
+                  <span data-feather="file-text"></span>
+                  维修管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/comments">
+                  <span data-feather="file-text"></span>
+                  评论管理
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">添加用户</h1>
+          </div>
+          <div class="alert alert-danger animated shake duration-2s " style="display: none;"  role="alert">
+             This is a danger alert—check it out!
+          </div>
+              <form class="form" id="start_form" method="post" action="/admin/start-new">
+                    <div class="form-group">
+                      <label for="inputState">场地选择</label>
+                      <select id="inputState" class="form-control" name="place">
+                        <option selected>篮球场</option>
+                        <option>足球场</option>
+                        <option>排球场</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="date">日期</label>
+                      <input type="date" class="form-control" id="date" placeholder="" required name="date" >
+                    </div>
+                    <div class="form-group">
+                      <label for="s_time">开始时间</label>
+                      <input type="time" class="form-control" id="s_time" placeholder="" required name="s_time" >
+                    </div>
+                    <div class="form-group">
+                      <label for="e_time">结束时间</label>
+                      <input type="time" class="form-control" id="e_time" placeholder="" required name="e_time" >
+                    </div>
+                    <div class="form-group">
+                      <label for="email">邮箱</label>
+                      <input type="text" class="form-control" id="email" name="user" required placeholder="用户邮箱 "  >
+                    </div>
+                     <div class="form-group">
+                        <label for="inputState">状态</label>
+                        <select id="inputState" class="form-control" name="status">
+                          <option selected>审核中</option>
+                          <option>不通过</option>
+                          <option>通过</option>
+                        </select>
+                      </div>
+                      <button class="btn btn-primary btn-lg btn-block" type="submit">预约</button>
+                </form>
+
+        </main>
+    </div>
+</div>
+
+  <script>
+     var alert = $('.alert')
+    $('#start_form').on('submit', function (e) {
+      e.preventDefault()
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/start',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 0) {
+            window.location.href = '/login'
+          } else if (err_code === 1) {
+            alert.text('这个时间已经被预约了')
+            alert.removeClass("display").addClass('show')
+          } else if (err_code === 500) {
+            alert.text('服务器忙，请稍后重试！')
+            alert.removeClass("display")
+          }
+        }
+      })
+    })
+  </script>
+  </body>
+</html>

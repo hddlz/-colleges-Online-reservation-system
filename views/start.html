@@ -1,0 +1,74 @@
+{{ extend './_layout/home.html' }}
+
+{{ block 'content' }}  
+
+    
+<main role="main">
+  <div class="row">
+    <div class="col-2"></div>
+      <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">开始预约</h4>
+            <div class="alert alert-danger animated shake duration-2s " style="display: none;"  role="alert">
+               This is a danger alert—check it out!
+            </div>
+          <form class="needs-validation" id="start_form" method="post" action="/register">
+              <div class="form-group">
+                <label for="inputState">场地选择</label>
+                <select id="inputState" class="form-control">
+                  <option selected>篮球场</option>
+                  <option>足球场</option>
+                  <option>排球场</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">日期</label>
+                <input type="date" class="form-control" id="date" placeholder="" required  name="date" value="" >
+              </div>
+              <div class="form-group">
+                <label for="s_time">开始时间</label>
+                <input type="time" class="form-control" id="s_time" placeholder=""   name="s_time" value="" >
+              </div>
+              <div class="form-group">
+                <label for="e_time">结束时间</label>
+                <input type="time" class="form-control" id="e_time" placeholder=""   name="e_time" value="" >
+              </div>
+              <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="text" class="form-control" id="email" name="email" required  placeholder="学号" >
+              </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">预约</button>
+          </form>
+        </div>
+  </div>
+</main>
+
+{{ /block }}
+
+{{ block 'script' }}
+  <script>
+     var alert = $('.alert')
+    $('#start_form').on('submit', function (e) {
+      e.preventDefault()
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/start',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 0) {
+            window.location.href = '/login'
+          } else if (err_code === 1) {
+            alert.text('这个时间已经被预约了')
+            alert.removeClass("display").addClass('show')
+          } else if (err_code === 500) {
+            alert.text('服务器忙，请稍后重试！')
+            alert.removeClass("display")
+          }
+        }
+      })
+    })
+  </script>
+{{ /block }}

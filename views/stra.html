@@ -1,0 +1,28 @@
+{{ extend './_layout/home.html' }}
+
+{{ block 'content' }}  
+    
+<main role="main">
+    
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            <h4 class="mb-3">院内设施</h4>
+            {{ each stra }}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                  <p class="card-head">{{ $value.title }}</p>
+                  <!-- <p class="card-text">{{ $value.text }}</p> -->
+                  <p class="card-text">{{ $value.time }}</p>
+                </div>
+              </div>
+            </div>
+            {{ /each }}
+          </div>
+        </div>
+      </div>
+
+</main>
+
+{{ /block }}

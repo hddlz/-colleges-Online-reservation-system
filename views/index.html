@@ -1,0 +1,76 @@
+{{ extend './_layout/home.html' }}
+
+{{ block 'content' }}   
+      <main role="main">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="first-slide" src="/public/img/timg (4).jpg" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="second-slide" src="/public/img/timg.jpg" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="third-slide" src="/public/img/tyc.jpg" alt="Third slide">
+              </div>
+             <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+             </a>
+             <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+            </a>
+            </div>
+    
+    
+          <!-- Marketing messaging and featurettes
+          ================================================== -->
+          <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+        <div class="container marketing"  style="margin-top:50px;">
+    
+            <!-- Three columns of text below the carousel -->
+          <div class="row">
+            <div class="col-lg-4">
+              <h2>已预约</h2>
+              <ul>
+                  <li><a href="#">5月15号11：30-12：30&nbsp;体育馆主会场</a></li>
+                  <li><a href="#">5月15号13:30-14:30&nbsp;二楼体育室</a></li>
+                  <li><a href="#">5月16号9:30-12:30&nbsp;体测室</a></li>
+                  <li><a href="#">5月16号13:50-15:30&nbsp;足球场</a></li>
+                  <li><a href="#">5月17日10:40-11:20&nbsp;篮球</a></li>
+                </ul>
+              <p><a class="btn btn-secondary" href="/time" role="button">更多 &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+              <div class="col-lg-4">
+              <h2>活动</h2>
+              <ul>
+                  <li><a href="#">陈氏太极拳协会第十一届比武大赛圆满结束</a></li>
+                  <li><a href="#">第三届“雪见杯”轮滑比赛成功举办</a></li>
+                  <li><a href="#">第九届传统武术大赛圆满落幕</a></li>
+                  <li><a href="#">第十七届“杏林杯”乒乓球比赛决赛举办</a></li>
+              </ul>
+              <p><a class="btn btn-secondary" href="/news" role="button">更多 &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+              <div class="col-lg-4">
+                <h2>体育场馆设施</h2>
+                <ul>
+                  <li><a href="/stra">足球场</a></li>
+                  <li><a href="/stra">篮球场</a></li>
+                  <li><a href="/stra">体育馆</a></li>
+                  <li><a href="/stra">体测室</a></li>
+                </ul>
+                <p><a class="btn btn-secondary" href="/stra" role="button">更多 &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+
+        </div><!-- /.container -->
+
+  </main>
+{{ /block }}

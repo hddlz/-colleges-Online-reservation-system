@@ -1,0 +1,54 @@
+{{ extend './_layout/home.html' }}
+
+{{ block 'content' }}   
+  <main role="main">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-8">
+        <h4>评论</h4>
+        <div class="col-md-4">
+          {{ each Comments }}
+              {{ if $value.status === '审核中' }}
+              <div class="hidden" style="display: none;" >
+                  <div class="card-body">
+                  <h5 class="card-title" >{{ $value.title }}<h5>
+                  <p class="card-text">{{ $value.content }}</p>
+                </div>
+              </div>
+              {{ else if $value.status === '不通过' }}
+                <div class="hidden" style="display: none;" >
+                  <div class="card-body">
+                  <h5 class="card-title">{{ $value.title }}</h5>
+                  <p class="card-text">{{ $value.content }}</p>
+                </div>
+              </div>
+              {{ else }} 
+              <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $value.title }}</h5>
+                  <p class="card-text">{{ $value.content }}</p>
+                </div>
+              </div>
+              {{ /if }}
+          {{ /each }}
+          </div>
+      </div>
+      <div class="col-2">
+        <form action="/comments" method="post">
+          <h4>添加评论</h4>
+          <div class="form-group">
+              <label for="title">标题</label>
+              <input class="form-control" type="text" id="title" name="title" required placeholder="标题">
+          </div>
+          <div class="form-group">
+            <label for="content">内容</label>
+            <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+          </div>
+          <input type="hidden" name="status" value="审核中">
+          <button class="btn btn-primary" type="submit">提交</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+{{ /block }}

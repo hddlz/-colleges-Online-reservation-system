@@ -1,0 +1,25 @@
+{
+  "name": "zqqbysj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "animate.css": "^3.7.0",
+    "blueimp-md5": "^2.10.0",
+    "bootstrap": "^4.3.1",
+    "echarts": "^4.2.1",
+    "express": "^4.16.4",
+    "express-art-template": "^1.0.1",
+    "express-session": "^1.16.1",
+    "is-keyword-js": "^1.0.3",
+    "jquery": "^3.4.1",
+    "js-tokens": "^4.0.0",
+    "mongoose": "^5.5.6",
+    "open-iconic": "^1.1.1"
+  }
+}
